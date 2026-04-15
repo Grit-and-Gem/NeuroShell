@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use candle_core::{DType, Device, Tensor};
 use candle_nn::VarBuilder;
-use candle_transformers::models::qwen2::{Config as Qwen2Config, Model as Qwen2Model};
+use candle_transformers::models::qwen2::{Config as Qwen2Config, ModelForCausalLM as Qwen2Model};
 use std::path::{Path, PathBuf};
 use tokenizers::Tokenizer;
 
@@ -105,12 +105,10 @@ impl InferenceEngine {
 
         // --- Prefill phase: process the entire prompt in one forward pass ---
         let input = Tensor::new(prompt_tokens.as_slice(), &self.device)?.unsqueeze(0)?;
-        // logits: [1, prompt_len, vocab_size]
+        // ModelForCausalLM.forward returns logits for the LAST position only: [1, 1, vocab_size]
         let logits = self.model.forward(&input, 0)?;
-
-        // The last position predicts the first generated token
-        let first_logits = logits.squeeze(0)?.get(prompt_len - 1)?; // [vocab_size]
-        let mut current_tok = first_logits.argmax(0)?.to_scalar::<u32>()?;
+        let logits = logits.squeeze(0)?.squeeze(0)?; // [vocab_size]
+        let mut current_tok = logits.argmax(0)?.to_scalar::<u32>()?;
 
         // --- Decode phase: one token at a time using the KV cache ---
         let mut output_tokens: Vec<u32> = Vec::with_capacity(64);
@@ -127,7 +125,6 @@ impl InferenceEngine {
             // Feed the single new token; seqlen_offset tells the model how many
             // tokens came before (for positional encoding + KV cache indexing)
             let input = Tensor::new(&[current_tok], &self.device)?.unsqueeze(0)?;
-            // logits: [1, 1, vocab_size]
             let logits = self.model.forward(&input, seqlen_offset)?;
             let logits = logits.squeeze(0)?.squeeze(0)?; // [vocab_size]
             current_tok = logits.argmax(0)?.to_scalar::<u32>()?;

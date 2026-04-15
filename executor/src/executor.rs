@@ -7,7 +7,6 @@ pub struct CommandResult {
     pub stdout: String,
     pub stderr: String,
     pub exit_code: i32,
-    pub success: bool,
 }
 
 /// Execute a shell command via `sh -c` and capture stdout, stderr, and exit code.
@@ -29,6 +28,5 @@ pub fn run_command(command: &str) -> Result<CommandResult> {
         stdout: String::from_utf8_lossy(&output.stdout).to_string(),
         stderr: String::from_utf8_lossy(&output.stderr).to_string(),
         exit_code,
-        success: output.status.success(),
     })
 }
