@@ -1,0 +1,271 @@
+{"instruction": "list all files including hidden ones", "command": "ls -la"}
+{"instruction": "list files in long format", "command": "ls -l"}
+{"instruction": "list files sorted by modification time newest first", "command": "ls -lt"}
+{"instruction": "list files sorted by size largest first", "command": "ls -lS"}
+{"instruction": "list only directories in the current folder", "command": "ls -d */"}
+{"instruction": "show current working directory", "command": "pwd"}
+{"instruction": "create a new directory called projects", "command": "mkdir projects"}
+{"instruction": "create nested directories a/b/c", "command": "mkdir -p a/b/c"}
+{"instruction": "remove a file called temp.txt", "command": "rm temp.txt"}
+{"instruction": "remove a directory and all its contents", "command": "rm -rf mydir"}
+{"instruction": "copy file.txt to backup.txt", "command": "cp file.txt backup.txt"}
+{"instruction": "copy a directory recursively", "command": "cp -r source/ destination/"}
+{"instruction": "move file.txt to the /tmp directory", "command": "mv file.txt /tmp/"}
+{"instruction": "rename oldname.txt to newname.txt", "command": "mv oldname.txt newname.txt"}
+{"instruction": "create an empty file called notes.txt", "command": "touch notes.txt"}
+{"instruction": "show the contents of a file", "command": "cat file.txt"}
+{"instruction": "show the first 10 lines of a file", "command": "head file.txt"}
+{"instruction": "show the first 20 lines of a file", "command": "head -n 20 file.txt"}
+{"instruction": "show the last 10 lines of a file", "command": "tail file.txt"}
+{"instruction": "follow a log file in real time", "command": "tail -f /var/log/syslog"}
+{"instruction": "count lines words and characters in a file", "command": "wc file.txt"}
+{"instruction": "count only the number of lines in a file", "command": "wc -l file.txt"}
+{"instruction": "search for the word error in a file", "command": "grep error file.txt"}
+{"instruction": "search for pattern case insensitively in a file", "command": "grep -i pattern file.txt"}
+{"instruction": "search recursively for a string in all files", "command": "grep -r \"search_term\" ."}
+{"instruction": "search for pattern and show line numbers", "command": "grep -n pattern file.txt"}
+{"instruction": "find files by name in current directory", "command": "find . -name \"*.txt\""}
+{"instruction": "find files modified in the last 7 days", "command": "find . -mtime -7"}
+{"instruction": "find files larger than 100MB", "command": "find . -size +100M"}
+{"instruction": "find all empty files", "command": "find . -empty -type f"}
+{"instruction": "change file permissions to 755", "command": "chmod 755 script.sh"}
+{"instruction": "make a script executable", "command": "chmod +x script.sh"}
+{"instruction": "change file owner to user john", "command": "chown john file.txt"}
+{"instruction": "change owner and group of a file", "command": "chown user:group file.txt"}
+{"instruction": "create a symbolic link", "command": "ln -s /path/to/target linkname"}
+{"instruction": "show disk usage of current directory", "command": "du -sh ."}
+{"instruction": "show disk usage of all subdirectories", "command": "du -sh */"}
+{"instruction": "show free disk space on all filesystems", "command": "df -h"}
+{"instruction": "show inode usage", "command": "df -i"}
+{"instruction": "display file contents with line numbers", "command": "cat -n file.txt"}
+{"instruction": "show differences between two files", "command": "diff file1.txt file2.txt"}
+{"instruction": "sort a file alphabetically", "command": "sort file.txt"}
+{"instruction": "sort a file numerically", "command": "sort -n file.txt"}
+{"instruction": "sort a file in reverse order", "command": "sort -r file.txt"}
+{"instruction": "remove duplicate lines from a file", "command": "sort file.txt | uniq"}
+{"instruction": "count unique lines in a file", "command": "sort file.txt | uniq -c"}
+{"instruction": "extract the second column from a CSV file", "command": "cut -d',' -f2 file.csv"}
+{"instruction": "extract characters 1 to 10 from each line", "command": "cut -c1-10 file.txt"}
+{"instruction": "replace all occurrences of foo with bar in a file", "command": "sed -i 's/foo/bar/g' file.txt"}
+{"instruction": "delete blank lines from a file", "command": "sed '/^$/d' file.txt"}
+{"instruction": "print lines between line 5 and 10", "command": "sed -n '5,10p' file.txt"}
+{"instruction": "print the third field from each line using awk", "command": "awk '{print $3}' file.txt"}
+{"instruction": "sum the values in the second column using awk", "command": "awk '{sum += $2} END {print sum}' file.txt"}
+{"instruction": "print lines where the first field is greater than 100", "command": "awk '$1 > 100' file.txt"}
+{"instruction": "compress a file with gzip", "command": "gzip file.txt"}
+{"instruction": "decompress a gzip file", "command": "gunzip file.txt.gz"}
+{"instruction": "create a tar archive of a directory", "command": "tar -czf archive.tar.gz directory/"}
+{"instruction": "extract a tar.gz archive", "command": "tar -xzf archive.tar.gz"}
+{"instruction": "list contents of a tar archive", "command": "tar -tzf archive.tar.gz"}
+{"instruction": "create a zip file", "command": "zip archive.zip file1 file2"}
+{"instruction": "extract a zip file", "command": "unzip archive.zip"}
+{"instruction": "extract zip to a specific directory", "command": "unzip archive.zip -d /target/dir"}
+{"instruction": "show all running processes", "command": "ps aux"}
+{"instruction": "show processes in a tree format", "command": "pstree"}
+{"instruction": "find process by name", "command": "pgrep nginx"}
+{"instruction": "kill a process by PID", "command": "kill 1234"}
+{"instruction": "force kill a process by PID", "command": "kill -9 1234"}
+{"instruction": "kill all processes with a given name", "command": "pkill nginx"}
+{"instruction": "show top processes by CPU usage", "command": "ps aux --sort=-%cpu | head -20"}
+{"instruction": "show top processes by memory usage", "command": "ps aux --sort=-%mem | head -20"}
+{"instruction": "run a command in the background", "command": "command &"}
+{"instruction": "show background jobs", "command": "jobs"}
+{"instruction": "bring background job to foreground", "command": "fg %1"}
+{"instruction": "show system memory usage", "command": "free -h"}
+{"instruction": "show CPU information", "command": "lscpu"}
+{"instruction": "show kernel version", "command": "uname -r"}
+{"instruction": "show all system information", "command": "uname -a"}
+{"instruction": "show system uptime", "command": "uptime"}
+{"instruction": "show current logged in user", "command": "whoami"}
+{"instruction": "show all logged in users", "command": "who"}
+{"instruction": "show current date and time", "command": "date"}
+{"instruction": "show date in ISO format", "command": "date -I"}
+{"instruction": "show all environment variables", "command": "env"}
+{"instruction": "show value of PATH variable", "command": "echo $PATH"}
+{"instruction": "set an environment variable", "command": "export MY_VAR=value"}
+{"instruction": "show system hostname", "command": "hostname"}
+{"instruction": "show IP address of all interfaces", "command": "ip addr show"}
+{"instruction": "show routing table", "command": "ip route show"}
+{"instruction": "ping a host 4 times", "command": "ping -c 4 google.com"}
+{"instruction": "download a file with curl", "command": "curl -O https://example.com/file.zip"}
+{"instruction": "make a GET request and show response", "command": "curl -s https://api.example.com/data"}
+{"instruction": "make a POST request with JSON data", "command": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' https://api.example.com/endpoint"}
+{"instruction": "download a file with wget", "command": "wget https://example.com/file.zip"}
+{"instruction": "show open network connections", "command": "ss -tuln"}
+{"instruction": "show listening ports", "command": "ss -tlnp"}
+{"instruction": "show all TCP connections", "command": "ss -t"}
+{"instruction": "trace route to a host", "command": "traceroute google.com"}
+{"instruction": "look up DNS records for a domain", "command": "nslookup example.com"}
+{"instruction": "get DNS information using dig", "command": "dig example.com"}
+{"instruction": "show network interface statistics", "command": "ifconfig"}
+{"instruction": "initialize a new git repository", "command": "git init"}
+{"instruction": "clone a git repository", "command": "git clone https://github.com/user/repo.git"}
+{"instruction": "show git status", "command": "git status"}
+{"instruction": "add all changed files to staging", "command": "git add ."}
+{"instruction": "add a specific file to staging", "command": "git add file.txt"}
+{"instruction": "commit staged changes with a message", "command": "git commit -m \"your commit message\""}
+{"instruction": "push to origin main branch", "command": "git push origin main"}
+{"instruction": "pull latest changes from remote", "command": "git pull"}
+{"instruction": "show git commit log", "command": "git log"}
+{"instruction": "show git log in one line format", "command": "git log --oneline"}
+{"instruction": "show difference between working tree and last commit", "command": "git diff"}
+{"instruction": "show difference between staged changes and last commit", "command": "git diff --staged"}
+{"instruction": "create a new branch called feature", "command": "git checkout -b feature"}
+{"instruction": "switch to an existing branch called main", "command": "git checkout main"}
+{"instruction": "list all branches", "command": "git branch -a"}
+{"instruction": "merge a branch into current branch", "command": "git merge feature"}
+{"instruction": "stash current changes", "command": "git stash"}
+{"instruction": "apply stashed changes", "command": "git stash pop"}
+{"instruction": "show git remote URLs", "command": "git remote -v"}
+{"instruction": "reset last commit keeping changes staged", "command": "git reset --soft HEAD~1"}
+{"instruction": "discard all unstaged changes", "command": "git checkout -- ."}
+{"instruction": "show commit history as graph", "command": "git log --oneline --graph --all"}
+{"instruction": "tag the current commit as version 1.0", "command": "git tag v1.0"}
+{"instruction": "list all docker containers including stopped", "command": "docker ps -a"}
+{"instruction": "list running docker containers", "command": "docker ps"}
+{"instruction": "list docker images", "command": "docker images"}
+{"instruction": "pull a docker image", "command": "docker pull ubuntu:latest"}
+{"instruction": "run a docker container interactively", "command": "docker run -it ubuntu bash"}
+{"instruction": "run a docker container in the background", "command": "docker run -d nginx"}
+{"instruction": "stop a docker container", "command": "docker stop container_id"}
+{"instruction": "remove a docker container", "command": "docker rm container_id"}
+{"instruction": "remove a docker image", "command": "docker rmi image_id"}
+{"instruction": "build a docker image from Dockerfile", "command": "docker build -t myapp:latest ."}
+{"instruction": "execute a command in a running container", "command": "docker exec -it container_id bash"}
+{"instruction": "show docker container logs", "command": "docker logs container_id"}
+{"instruction": "follow docker container logs in real time", "command": "docker logs -f container_id"}
+{"instruction": "copy file from container to host", "command": "docker cp container_id:/path/file ."}
+{"instruction": "show docker system disk usage", "command": "docker system df"}
+{"instruction": "remove all stopped containers", "command": "docker container prune"}
+{"instruction": "show installed packages with apt", "command": "apt list --installed"}
+{"instruction": "update package list", "command": "apt update"}
+{"instruction": "upgrade all packages", "command": "apt upgrade -y"}
+{"instruction": "install a package", "command": "apt install -y package-name"}
+{"instruction": "remove a package", "command": "apt remove package-name"}
+{"instruction": "search for a package", "command": "apt search package-name"}
+{"instruction": "show the path of an executable", "command": "which python3"}
+{"instruction": "show where a command is located", "command": "whereis gcc"}
+{"instruction": "run a command as root", "command": "sudo command"}
+{"instruction": "switch to root user", "command": "sudo su"}
+{"instruction": "show command history", "command": "history"}
+{"instruction": "search command history", "command": "history | grep keyword"}
+{"instruction": "clear the terminal screen", "command": "clear"}
+{"instruction": "show calendar for current month", "command": "cal"}
+{"instruction": "print hello world to the terminal", "command": "echo 'Hello, World!'"}
+{"instruction": "create a file with some text content", "command": "echo 'content here' > file.txt"}
+{"instruction": "append text to a file", "command": "echo 'new line' >> file.txt"}
+{"instruction": "redirect command output to a file", "command": "ls -la > output.txt"}
+{"instruction": "redirect stderr to a file", "command": "command 2> error.log"}
+{"instruction": "redirect both stdout and stderr to a file", "command": "command > output.txt 2>&1"}
+{"instruction": "pipe output of one command to another", "command": "ls -la | grep '.txt'"}
+{"instruction": "count number of files in directory", "command": "ls | wc -l"}
+{"instruction": "find and delete all .log files", "command": "find . -name '*.log' -delete"}
+{"instruction": "find files and execute a command on each", "command": "find . -name '*.txt' -exec cat {} \\;"}
+{"instruction": "show the last 5 commands in history", "command": "history | tail -5"}
+{"instruction": "monitor CPU and memory usage interactively", "command": "htop"}
+{"instruction": "show processes sorted by CPU usage", "command": "top -o %CPU"}
+{"instruction": "show all cron jobs for current user", "command": "crontab -l"}
+{"instruction": "edit cron jobs for current user", "command": "crontab -e"}
+{"instruction": "show system journal logs", "command": "journalctl -n 100"}
+{"instruction": "follow system logs in real time", "command": "journalctl -f"}
+{"instruction": "show logs for a specific service", "command": "journalctl -u nginx"}
+{"instruction": "restart a systemd service", "command": "systemctl restart nginx"}
+{"instruction": "start a systemd service", "command": "systemctl start nginx"}
+{"instruction": "stop a systemd service", "command": "systemctl stop nginx"}
+{"instruction": "check status of a systemd service", "command": "systemctl status nginx"}
+{"instruction": "enable a service to start on boot", "command": "systemctl enable nginx"}
+{"instruction": "disable a service from starting on boot", "command": "systemctl disable nginx"}
+{"instruction": "list all running services", "command": "systemctl list-units --type=service --state=running"}
+{"instruction": "show all users on the system", "command": "cat /etc/passwd | cut -d: -f1"}
+{"instruction": "add a new user", "command": "useradd -m newuser"}
+{"instruction": "change user password", "command": "passwd username"}
+{"instruction": "add user to a group", "command": "usermod -aG groupname username"}
+{"instruction": "show groups for a user", "command": "groups username"}
+{"instruction": "show file type", "command": "file document.pdf"}
+{"instruction": "show detailed file information", "command": "stat file.txt"}
+{"instruction": "calculate MD5 checksum of a file", "command": "md5sum file.txt"}
+{"instruction": "calculate SHA256 checksum of a file", "command": "sha256sum file.txt"}
+{"instruction": "encode a string to base64", "command": "echo 'hello' | base64"}
+{"instruction": "decode a base64 string", "command": "echo 'aGVsbG8=' | base64 -d"}
+{"instruction": "generate a random password", "command": "openssl rand -base64 16"}
+{"instruction": "show SSL certificate details for a domain", "command": "openssl s_client -connect example.com:443 </dev/null 2>/dev/null | openssl x509 -text -noout"}
+{"instruction": "create a self-signed SSL certificate", "command": "openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes"}
+{"instruction": "ssh into a remote server", "command": "ssh user@192.168.1.1"}
+{"instruction": "copy file to remote server with scp", "command": "scp file.txt user@remote:/path/"}
+{"instruction": "copy file from remote server with scp", "command": "scp user@remote:/path/file.txt ."}
+{"instruction": "sync directories with rsync", "command": "rsync -avz source/ user@remote:/dest/"}
+{"instruction": "sync local directories with rsync", "command": "rsync -av source/ destination/"}
+{"instruction": "show all mounted filesystems", "command": "mount | column -t"}
+{"instruction": "mount a USB drive", "command": "mount /dev/sdb1 /mnt/usb"}
+{"instruction": "unmount a filesystem", "command": "umount /mnt/usb"}
+{"instruction": "check disk for errors", "command": "fsck /dev/sda1"}
+{"instruction": "show block devices", "command": "lsblk"}
+{"instruction": "show PCI devices", "command": "lspci"}
+{"instruction": "show USB devices", "command": "lsusb"}
+{"instruction": "show kernel messages", "command": "dmesg | tail -50"}
+{"instruction": "show memory information", "command": "cat /proc/meminfo"}
+{"instruction": "show CPU information from proc", "command": "cat /proc/cpuinfo"}
+{"instruction": "show load average", "command": "cat /proc/loadavg"}
+{"instruction": "reboot the system", "command": "sudo reboot"}
+{"instruction": "shutdown the system immediately", "command": "sudo shutdown -h now"}
+{"instruction": "schedule shutdown in 30 minutes", "command": "sudo shutdown -h +30"}
+{"instruction": "cancel a scheduled shutdown", "command": "sudo shutdown -c"}
+{"instruction": "show Python version", "command": "python3 --version"}
+{"instruction": "install a Python package", "command": "pip install package-name"}
+{"instruction": "list installed Python packages", "command": "pip list"}
+{"instruction": "create a Python virtual environment", "command": "python3 -m venv venv"}
+{"instruction": "activate a Python virtual environment", "command": "source venv/bin/activate"}
+{"instruction": "run a Python script", "command": "python3 script.py"}
+{"instruction": "run a Node.js script", "command": "node script.js"}
+{"instruction": "install a Node package globally", "command": "npm install -g package-name"}
+{"instruction": "initialize a new Node.js project", "command": "npm init -y"}
+{"instruction": "install project dependencies from package.json", "command": "npm install"}
+{"instruction": "start a Node application", "command": "npm start"}
+{"instruction": "run tests with npm", "command": "npm test"}
+{"instruction": "build a Rust project", "command": "cargo build --release"}
+{"instruction": "run a Rust project", "command": "cargo run"}
+{"instruction": "run Rust tests", "command": "cargo test"}
+{"instruction": "add a dependency to Rust project", "command": "cargo add serde"}
+{"instruction": "compile a C program", "command": "gcc -o output main.c"}
+{"instruction": "compile a C++ program", "command": "g++ -o output main.cpp"}
+{"instruction": "make a HTTP GET request and pretty print JSON", "command": "curl -s https://api.example.com | python3 -m json.tool"}
+{"instruction": "watch a file for changes", "command": "watch -n 1 cat file.txt"}
+{"instruction": "repeat a command every 2 seconds", "command": "watch -n 2 'ps aux | head -5'"}
+{"instruction": "split a large file into 100MB chunks", "command": "split -b 100M largefile.bin chunk_"}
+{"instruction": "join split files back together", "command": "cat chunk_* > original_file"}
+{"instruction": "show the most recently modified file", "command": "ls -t | head -1"}
+{"instruction": "find all python files and count total lines", "command": "find . -name '*.py' | xargs wc -l | tail -1"}
+{"instruction": "show all files owned by a user", "command": "find / -user username 2>/dev/null"}
+{"instruction": "show total size of a directory in human readable format", "command": "du -sh /path/to/directory"}
+{"instruction": "find duplicate files by content hash", "command": "find . -type f | xargs md5sum | sort | awk 'NR>1 && prev_hash==$1 {print prev_file; print $2} {prev_hash=$1; prev_file=$2}'"}
+{"instruction": "show open files by a specific process", "command": "lsof -p 1234"}
+{"instruction": "show which process is using a port", "command": "lsof -i :8080"}
+{"instruction": "show all open network files", "command": "lsof -i"}
+{"instruction": "run a command with a timeout of 30 seconds", "command": "timeout 30 long-running-command"}
+{"instruction": "run multiple commands in parallel", "command": "command1 & command2 & wait"}
+{"instruction": "measure how long a command takes", "command": "time ls -la"}
+{"instruction": "create a here document", "command": "cat << EOF > file.txt\ncontent\nEOF"}
+{"instruction": "show the manual page for a command", "command": "man ls"}
+{"instruction": "quickly look up what a command does", "command": "tldr ls"}
+{"instruction": "show all shell aliases", "command": "alias"}
+{"instruction": "set a shell alias", "command": "alias ll='ls -la'"}
+{"instruction": "show last login information for a user", "command": "last username"}
+{"instruction": "show failed login attempts", "command": "lastb"}
+{"instruction": "lock a user account", "command": "passwd -l username"}
+{"instruction": "unlock a user account", "command": "passwd -u username"}
+{"instruction": "show running docker compose services", "command": "docker compose ps"}
+{"instruction": "start docker compose services", "command": "docker compose up -d"}
+{"instruction": "stop docker compose services", "command": "docker compose down"}
+{"instruction": "view docker compose logs", "command": "docker compose logs -f"}
+{"instruction": "rebuild docker compose services", "command": "docker compose up -d --build"}
+{"instruction": "show python virtual environment packages", "command": "pip freeze"}
+{"instruction": "export pip requirements to file", "command": "pip freeze > requirements.txt"}
+{"instruction": "install from requirements file", "command": "pip install -r requirements.txt"}
+{"instruction": "check if a port is open on a remote host", "command": "nc -zv hostname 80"}
+{"instruction": "transfer data between two hosts using netcat", "command": "nc -l 1234 > received_file"}
+{"instruction": "show ARP table", "command": "arp -n"}
+{"instruction": "flush DNS cache", "command": "systemd-resolve --flush-caches"}
+{"instruction": "show all firewall rules with iptables", "command": "iptables -L -n -v"}
+{"instruction": "block an IP address with iptables", "command": "iptables -A INPUT -s 192.168.1.100 -j DROP"}
+{"instruction": "show network bandwidth usage", "command": "vnstat"}
+{"instruction": "show real time network usage per interface", "command": "iftop -i eth0"}
