@@ -51,10 +51,16 @@ impl InferenceEngine {
             model_dir.display()
         );
 
+        // Detect the dtype stored in the checkpoint rather than forcing F32.
+        // export_model.py saves in float16; loading with DType::F32 would upcast
+        // every parameter on init, doubling resident memory and negating mmap benefits.
+        let dtype = checkpoint_dtype(&weight_files[0]);
+        println!("  Checkpoint dtype: {dtype:?}");
+
         // Memory-map model weights (fast, does not copy into RAM upfront)
         // SAFETY: the files must not be modified while the program is running.
         let vb = unsafe {
-            VarBuilder::from_mmaped_safetensors(&weight_files, DType::F32, &device)
+            VarBuilder::from_mmaped_safetensors(&weight_files, dtype, &device)
                 .context("Failed to memory-map model weights")?
         };
 
@@ -155,6 +161,64 @@ impl InferenceEngine {
 
         Ok(command)
     }
+}
+
+/// Peek at the safetensors JSON header to find the dtype of the first stored tensor.
+///
+/// The safetensors format begins with an 8-byte little-endian length, followed by
+/// that many bytes of JSON.  Each tensor entry looks like:
+///   "weight_name": {"dtype": "F16", "shape": [...], "data_offsets": [...]}
+///
+/// Defaults to F16 on any parse failure so callers never have to handle an error here.
+fn checkpoint_dtype(path: &Path) -> DType {
+    use std::io::Read;
+
+    let file = match std::fs::File::open(path) {
+        Ok(f) => f,
+        Err(_) => return DType::F16,
+    };
+    let mut reader = std::io::BufReader::new(file);
+
+    // Read the 8-byte header-length prefix
+    let mut len_buf = [0u8; 8];
+    if reader.read_exact(&mut len_buf).is_err() {
+        return DType::F16;
+    }
+    let header_len = u64::from_le_bytes(len_buf) as usize;
+
+    // Read the JSON header (cap at 256 KB — more than enough for any model)
+    let read_len = header_len.min(256 * 1024);
+    let mut header_buf = vec![0u8; read_len];
+    if reader.read_exact(&mut header_buf).is_err() {
+        return DType::F16;
+    }
+
+    let header: serde_json::Value = match serde_json::from_slice(&header_buf) {
+        Ok(v) => v,
+        Err(_) => return DType::F16,
+    };
+
+    let obj = match header.as_object() {
+        Some(o) => o,
+        None => return DType::F16,
+    };
+
+    for (key, val) in obj {
+        if key == "__metadata__" {
+            continue;
+        }
+        if let Some(dtype_str) = val.get("dtype").and_then(|v| v.as_str()) {
+            return match dtype_str {
+                "F16" => DType::F16,
+                "BF16" => DType::BF16,
+                "F32" => DType::F32,
+                "F64" => DType::F64,
+                _ => DType::F16,
+            };
+        }
+    }
+
+    DType::F16 // default if no tensor entry was found
 }
 
 /// Find model.safetensors in `model_dir`, or all sharded model-*.safetensors files.

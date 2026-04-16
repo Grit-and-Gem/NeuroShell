@@ -102,11 +102,15 @@ def main():
     print()
     print("Export complete!")
     print()
+    # Use the absolute path so the printed command is correct regardless of
+    # which directory the user runs it from (e.g. after cd ../executor the
+    # relative path "../{args.output}" would resolve to the wrong location).
+    abs_output = os.path.abspath(args.output)
     print("Next steps:")
     print(f"  cd ../executor")
     print(f"  cargo build --release")
     print(f"  echo 'list all files' > ../input/task.txt")
-    print(f"  ./target/release/neuroshell --model ../{args.output}")
+    print(f"  ./target/release/neuroshell --model {abs_output}")
 
 
 if __name__ == "__main__":
